@@ -1,26 +1,207 @@
 @import "tailwindcss";
 
+/* ===========================================================
+   DESIGN TOKENS
+=========================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+
+  --surface: 248 250 252;
+  --surface-elevated: 255 255 255;
+
+  /* Text */
+  --muted: 100 116 139;
+  --muted-foreground: 71 85 105;
+
+  /* Borders */
+  --border: 226 232 240;
+  --border-strong: 203 213 225;
+
+  /* Brand */
+  --primary: 15 23 42;
+  --primary-foreground: 255 255 255;
+
+  --accent: 37 99 235;
+  --accent-foreground: 255 255 255;
+
+  /* Feedback */
+  --success: 22 163 74;
+  --warning: 217 119 6;
+  --destructive: 220 38 38;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Layout */
+  --container-width: 1280px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 9 9 11;
+  --foreground: 250 250 250;
+
+  --surface: 24 24 27;
+  --surface-elevated: 39 39 42;
+
+  --muted: 161 161 170;
+  --muted-foreground: 212 212 216;
+
+  --border: 39 39 42;
+  --border-strong: 63 63 70;
+
+  --primary: 250 250 250;
+  --primary-foreground: 9 9 11;
+
+  --accent: 96 165 250;
+  --accent-foreground: 9 9 11;
+
+  --success: 34 197 94;
+  --warning: 245 158 11;
+  --destructive: 239 68 68;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===========================================================
+   BASE RESET
+=========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
+
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.18);
+}
+
+/* ===========================================================
+   TYPOGRAPHY
+=========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+p {
+  color: rgb(var(--muted-foreground));
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+/* ===========================================================
+   SCROLLBAR
+=========================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong));
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--muted));
+}
+
+/* ===========================================================
+   UTILITIES
+=========================================================== */
+
+@utility container-default {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility section-padding {
+  padding-block: clamp(7rem, 10vw, 11rem);
+}
+
+@utility surface {
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius-lg);
+}
+
+@utility surface-elevated {
+  background: rgb(var(--surface-elevated));
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius-lg);
+}
+
+@utility text-muted {
+  color: rgb(var(--muted));
+}
+
+@utility border-default {
+  border-color: rgb(var(--border));
 }
